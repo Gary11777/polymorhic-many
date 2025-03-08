@@ -2,13 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class LikePostsTest extends TestCase
+class LikingTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -22,5 +23,17 @@ class LikePostsTest extends TestCase
         $post->like();
 
         $this->assertCount(1, $post->likes);
+        $this->assertTrue($post->likes->contains('id', auth()->id()));
+    }
+
+    public function test_a_comment_can_be_liked(): void
+    {
+        $this->actingAs(User::factory()->create());
+
+        $comment = Comment::factory()->create();
+
+        $comment->like();
+
+        $this->assertCount(1, $comment->likes);
     }
 }
