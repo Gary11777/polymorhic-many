@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class Post extends Model
+class Comment extends Model
 {
-    use Likable;
+   use Likable;
 }
